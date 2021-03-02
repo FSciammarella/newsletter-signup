@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https")
 const logger = require("morgan");
-const helmet = require("helmet");
+
 
 require("dotenv").config();
 
@@ -13,18 +13,6 @@ app.use(logger());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(helmet());
-app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'","'*.jsdelivr.net'"],
-        scriptSrc: ["'self'", "'*.jsdelivr.net'"],
-        objectSrc: ["'none'"],
-        styleSrc: ["'self'", "'unsafe-inline'", "'*.jsdeliver.net'", "'*.googleapis.com'"],
-        upgradeInsecureRequests: [],
-      },
-    })
-  );
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/signup.html")
