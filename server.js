@@ -14,6 +14,16 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(helmet());
+app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "cdn.jsdelivr.net.com"],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
+    })
+  );
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/signup.html")
