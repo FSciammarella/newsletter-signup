@@ -2,13 +2,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https")
 const logger = require("morgan");
+
+require("dotenv").config();
+
 const {
     request
 } = require("http");
 const {
     json
 } = require("body-parser");
-const { compile } = require("morgan");
+const {
+    compile
+} = require("morgan");
 
 const app = express();
 app.use(express.static("public"));
@@ -37,16 +42,16 @@ app.post("/", (req, res) => {
     }
     const jsonData = JSON.stringify(data);
 
-    const url = "https://us1.api.mailchimp.com/3.0/lists/f42b507ce4/"
+    const url = `https://us1.api.mailchimp.com/3.0/lists/${process.env.LIST_ID}/`;
     const options = {
         method: "POST",
-        auth: "rsrs:4ef5bc0ab2fad12a781fb2c7ea5d39bc-us1"
+        auth: `rsrs:${process.env.API_KEY}`
     }
 
     const request = https.request(url, options, (response) => {
         response.on("data", (d) => {
             errors = JSON.parse(d).error_count;
-            if (errors || response.statusCode!=200) {
+            if (errors || response.statusCode != 200) {
                 console.log(JSON.parse(d));
                 res.sendFile(__dirname + "/failure.html");
             } else {
@@ -60,10 +65,10 @@ app.post("/", (req, res) => {
 
 });
 
-app.post("/failure",(_,res)=>{
+app.post("/failure", (_, res) => {
     res.redirect("/");
 })
 
 app.listen(process.env.PORT || 3000, (req, res) => {
-    console.log("Server up at http://localhost:3000");
+    console.log(`Server up at http://localhost:${process.env.PORT || 3000}`);
 });
