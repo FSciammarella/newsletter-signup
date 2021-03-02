@@ -17,8 +17,8 @@ app.use(helmet());
 app.use(
     helmet.contentSecurityPolicy({
       directives: {
-        defaultSrc: ["'self'","cdn.jsdelivr.net"],
-        scriptSrc: ["'self'", "cdn.jsdelivr.net.com"],
+        defaultSrc: ["'self'","*.jsdelivr.net"],
+        scriptSrc: ["'self'", "*.jsdelivr.net"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: [],
       },
