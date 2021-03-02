@@ -17,10 +17,10 @@ app.use(helmet());
 app.use(
     helmet.contentSecurityPolicy({
       directives: {
-        defaultSrc: ["'self'","*.jsdelivr.net"],
-        scriptSrc: ["'self'", "*.jsdelivr.net"],
+        defaultSrc: ["'self'","'*.jsdelivr.net'"],
+        scriptSrc: ["'self'", "'*.jsdelivr.net'"],
         objectSrc: ["'none'"],
-        styleSrc: ["self", "unsafe-inline", "*.jsdeliver.net","*.googleapis.com"],
+        styleSrc: ["'self'", "'unsafe-inline'", "'*.jsdeliver.net'", "'*.googleapis.com'"],
         upgradeInsecureRequests: [],
       },
     })
