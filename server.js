@@ -2,25 +2,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https")
 const logger = require("morgan");
+const helmet = require("helmet");
 
 require("dotenv").config();
 
-const {
-    request
-} = require("http");
-const {
-    json
-} = require("body-parser");
-const {
-    compile
-} = require("morgan");
 
 const app = express();
 app.use(express.static("public"));
-app.use(logger("simple"));
+app.use(logger());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(helmet());
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/signup.html")
@@ -69,6 +62,6 @@ app.post("/failure", (_, res) => {
     res.redirect("/");
 })
 
-app.listen(process.env.PORT || 3000, (req, res) => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(`Server up at http://localhost:${process.env.PORT || 3000}`);
 });
