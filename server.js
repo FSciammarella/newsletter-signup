@@ -20,6 +20,7 @@ app.use(
         defaultSrc: ["'self'","*.jsdelivr.net"],
         scriptSrc: ["'self'", "*.jsdelivr.net"],
         objectSrc: ["'none'"],
+        styleSrc: ["self", "unsafe-inline", "*.jsdeliver.net","*.googleapis.com"],
         upgradeInsecureRequests: [],
       },
     })
