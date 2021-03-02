@@ -72,6 +72,10 @@ app.post("/failure", (_, res) => {
     res.redirect("/");
 })
 
+<<<<<<< HEAD
 app.listen(process.env.PORT || 3000, () => {
+=======
+app.listen(process.env.PORT || 3000, (req, res) => {
+>>>>>>> 5b2bdf5 (Adjusted privacy)
     console.log(`Server up at http://localhost:${process.env.PORT || 3000}`);
 });
